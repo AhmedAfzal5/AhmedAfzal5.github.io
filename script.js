@@ -1,86 +1,74 @@
 // Dark Mode Toggle
-const themeToggleBtn = document.getElementById('theme-toggle');
-const currentTheme = localStorage.getItem('theme');
-
-if (currentTheme) {
-  document.body.classList.add(currentTheme);
-  if (currentTheme === 'dark-mode') {
-    themeToggleBtn.innerText = 'Light Mode';
-  }
-}
-
-themeToggleBtn.addEventListener('click', () => {
+const darkModeToggle = document.getElementById('dark-mode-toggle');
+darkModeToggle.addEventListener('click', () => {
   document.body.classList.toggle('dark-mode');
-  
-  let theme = 'light-mode';
-  if (document.body.classList.contains('dark-mode')) {
-    theme = 'dark-mode';
-    themeToggleBtn.innerText = 'Light Mode';
-  } else {
-    themeToggleBtn.innerText = 'Dark Mode';
-  }
-  localStorage.setItem('theme', theme);
 });
 
-// Smooth Scrolling for Navbar Links
-const navbarLinks = document.querySelectorAll('.navbar a[href^="#"]');
-navbarLinks.forEach(link => {
-  link.addEventListener('click', function (e) {
-    e.preventDefault();
-    const targetId = this.getAttribute('href');
-    const targetElement = document.querySelector(targetId);
+// Scroll Progress Bar
+window.addEventListener('scroll', () => {
+  const scrollDistance = document.documentElement.scrollTop;
+  const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const scrollPercentage = (scrollDistance / docHeight) * 100;
+  document.getElementById('progress-bar').style.width = `${scrollPercentage}%`;
+});
 
-    window.scrollTo({
-      top: targetElement.offsetTop - 50,
-      behavior: 'smooth'
+// Filtering Projects
+const filterButtons = document.querySelectorAll('.filter-options button');
+const projectItems = document.querySelectorAll('.project-item');
+
+filterButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const filter = button.getAttribute('data-filter');
+    projectItems.forEach(item => {
+      if (filter === 'all' || item.getAttribute('data-category') === filter) {
+        item.style.display = 'block';
+      } else {
+        item.style.display = 'none';
+      }
     });
   });
 });
 
-// Simple Form Validation
-const contactForm = document.querySelector('.contact form');
-const nameInput = document.getElementById('name');
-const emailInput = document.getElementById('email');
-const messageInput = document.getElementById('message');
-const formMessage = document.createElement('p');
-formMessage.classList.add('form-message');
-contactForm.appendChild(formMessage);
+// Animated Scroll on Projects
+const animatedElements = document.querySelectorAll('.animated-element');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in-view');
+    }
+  });
+});
+
+animatedElements.forEach(el => observer.observe(el));
+
+// Contact Form Submission using EmailJS
+const contactForm = document.getElementById('contact-form');
+const formMessage = document.getElementById('form-message');
 
 contactForm.addEventListener('submit', function (e) {
   e.preventDefault();
 
-  if (nameInput.value === '' || emailInput.value === '' || messageInput.value === '') {
-    formMessage.innerText = 'Please fill in all fields.';
-    formMessage.style.color = 'red';
-  } else if (!validateEmail(emailInput.value)) {
-    formMessage.innerText = 'Please enter a valid email.';
-    formMessage.style.color = 'red';
-  } else {
-    formMessage.innerText = 'Form submitted successfully!';
-    formMessage.style.color = 'green';
-    contactForm.reset();
-  }
+  emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
+    .then(function(response) {
+      formMessage.innerText = 'Message sent successfully!';
+      formMessage.style.color = 'green';
+    }, function(error) {
+      formMessage.innerText = 'Failed to send message. Please try again.';
+      formMessage.style.color = 'red';
+    });
+
+  contactForm.reset();
 });
 
-function validateEmail(email) {
-  const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  return re.test(String(email).toLowerCase());
-}
+// Resume Accordion
+const toggleButtons = document.querySelectorAll('.toggle-btn');
 
-// Scroll Back to Top Button
-const scrollToTopBtn = document.getElementById('scroll-to-top');
-
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 300) {
-    scrollToTopBtn.style.display = 'block';
-  } else {
-    scrollToTopBtn.style.display = 'none';
-  }
-});
-
-scrollToTopBtn.addEventListener('click', () => {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
+toggleButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const details = btn.parentElement.nextElementSibling;
+    const isOpen = details.style.display === 'block';
+    details.style.display = isOpen ? 'none' : 'block';
+    btn.textContent = isOpen ? '+' : '-';
   });
 });

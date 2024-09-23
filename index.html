@@ -3,68 +3,95 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Ahmed Afzal's Personal Portfolio">
-  <meta name="keywords" content="portfolio, web developer, Ahmed Afzal">
+  <meta name="description" content="Ahmed Afzal's Portfolio. Showcasing skills, projects, and experience.">
+  <meta name="keywords" content="Ahmed Afzal, portfolio, web development, projects">
   <meta name="author" content="Ahmed Afzal">
-  <title>Ahmed Afzal Portfolio</title>
+  <title>Ahmed Afzal - Portfolio</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header>
-    <nav class="navbar">
+    <nav>
       <ul>
         <li><a href="#about">About Me</a></li>
         <li><a href="#projects">Projects</a></li>
+        <li><a href="#resume">Resume</a></li>
         <li><a href="#contact">Contact</a></li>
-        <li><button id="theme-toggle">Toggle Dark Mode</button></li>
+        <li><button id="dark-mode-toggle">Dark Mode</button></li>
       </ul>
     </nav>
   </header>
 
-  <section id="hero" class="hero">
-    <h1>Hello, I'm Ahmed Afzal</h1>
-    <p>Software Developer & IT Analyst</p>
-    <a href="#projects" class="btn">See My Work</a>
+  <div id="progress-bar"></div> <!-- Scroll progress bar -->
+
+  <section id="about">
+    <h1>About Me</h1>
+    <p>Hello, I'm Ahmed Afzal, a web developer with a passion for building interactive, scalable websites.</p>
   </section>
 
-  <section id="about" class="about">
-    <h2>About Me</h2>
-    <p>I'm a passionate developer with a background in computer engineering technology. I have experience in cloud computing, software development, and creating user-friendly web applications.</p>
-  </section>
-
-  <section id="projects" class="projects">
-    <h2>Projects</h2>
-    <div class="project-item">
-      <h3>Social Media Website</h3>
-      <p>A social media platform built using Node.js, HTML, CSS, and JavaScript.</p>
-      <a href="https://github.com/your-username/social-media-project" target="_blank" class="btn">View Project</a>
+  <section id="projects">
+    <h2>My Projects</h2>
+    <div class="filter-options">
+      <button data-filter="all">All</button>
+      <button data-filter="web">Web Development</button>
+      <button data-filter="ml">Machine Learning</button>
     </div>
-    <div class="project-item">
-      <h3>Java Compiler Tool</h3>
-      <p>A user-friendly Java program that integrates with modern IDEs to compile mainframe files on Windows platforms.</p>
-      <a href="https://github.com/your-username/java-compiler-tool" target="_blank" class="btn">View Project</a>
+    <div class="projects">
+      <div class="project-item animated-element" data-category="web">
+        <h3>Project 1</h3>
+        <img src="project1.jpg" alt="Project 1" loading="lazy">
+        <p>Details about Web Development project 1.</p>
+      </div>
+      <div class="project-item animated-element" data-category="ml">
+        <h3>Project 2</h3>
+        <img src="project2.jpg" alt="Project 2" loading="lazy">
+        <p>Details about Machine Learning project 2.</p>
+      </div>
     </div>
   </section>
 
-  <section id="contact" class="contact">
+  <section id="resume">
+    <h2>Interactive Resume</h2>
+    <div class="resume-section">
+      <h3>Work Experience</h3>
+      <div class="resume-item">
+        <h4>IT Analyst - CRA <span class="toggle-btn">+</span></h4>
+        <div class="resume-details" style="display: none;">
+          <p>Worked on IT modernization projects including mainframe integration.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="testimonials">
+    <h2>Testimonials</h2>
+    <div class="testimonials">
+      <div class="testimonial">
+        <p>"Ahmed is a fantastic developer!"</p>
+        <h4>- John Doe, Senior Developer</h4>
+      </div>
+      <div class="testimonial">
+        <p>"Great to work with, highly recommended!"</p>
+        <h4>- Jane Smith, Project Manager</h4>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
     <h2>Contact Me</h2>
     <form id="contact-form">
-      <input type="text" id="name" name="name" placeholder="Your Name" required>
-      <input type="email" id="email" name="email" placeholder="Your Email" required>
-      <textarea id="message" name="message" placeholder="Your Message" required></textarea>
-      <button type="submit" class="btn">Send Message</button>
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="message" placeholder="Your Message" required></textarea>
+      <button type="submit">Send</button>
+      <p id="form-message"></p>
     </form>
-    <p id="success-message" class="hidden">Thank you! Your message has been sent.</p>
   </section>
 
   <footer>
-    <p>&copy; 2024 Ahmed Afzal</p>
-    <div class="socials">
-      <a href="https://github.com/your-username" target="_blank">GitHub</a>
-      <a href="https://www.linkedin.com/in/your-profile" target="_blank">LinkedIn</a>
-    </div>
+    <p>© 2024 Ahmed Afzal</p>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="scripts.js"></script>
 </body>
 </html>
