@@ -1,44 +1,97 @@
 /* General Styling */
-body {
-    font-family: Arial, sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
-    transition: background-color 0.3s ease;
+    color: #333;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
   
+  /* Header & Navigation */
   header {
     background-color: #007bff;
     color: white;
-    padding: 10px;
-    text-align: center;
+    padding: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   }
   
   nav ul {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     list-style: none;
     padding: 0;
   }
   
   nav ul li {
-    margin: 0 10px;
+    margin: 0 20px;
   }
   
-  nav ul li a, #dark-mode-toggle {
+  nav ul li a,
+  #dark-mode-toggle {
     color: white;
     text-decoration: none;
-    background: #333;
-    padding: 10px 15px;
-    border-radius: 5px;
+    background: #0066cc;
+    padding: 10px 20px;
+    border-radius: 30px;
+    transition: background-color 0.3s ease;
   }
   
-  #about, #projects, #resume, #testimonials, #contact {
-    padding: 20px;
+  nav ul li a:hover,
+  #dark-mode-toggle:hover {
+    background-color: #0052a5;
+  }
+  
+  /* Section Styling */
+  section {
+    padding: 60px 20px;
     text-align: center;
   }
   
-  /* Progress Bar */
+  h1, h2, h3, h4 {
+    margin-bottom: 20px;
+    color: #007bff;
+  }
+  
+  h2 {
+    font-size: 2.2rem;
+  }
+  
+  p {
+    margin-bottom: 30px;
+    line-height: 1.8;
+  }
+  
+  #about {
+    background-color: #eef2f7;
+  }
+  
+  #projects {
+    background-color: #fff;
+  }
+  
+  #resume {
+    background-color: #eef2f7;
+  }
+  
+  #testimonials {
+    background-color: #fff;
+  }
+  
+  #contact {
+    background-color: #eef2f7;
+  }
+  
+  /* Scroll Progress Bar */
   #progress-bar {
     position: fixed;
     top: 0;
@@ -49,36 +102,62 @@ body {
     z-index: 9999;
   }
   
-  /* Projects */
-  .filter-options button {
-    background: #007bff;
+  /* Button Styling */
+  button {
+    background-color: #007bff;
     color: white;
-    padding: 10px;
+    padding: 12px 25px;
+    border-radius: 30px;
     border: none;
     cursor: pointer;
-    margin: 5px;
+    font-weight: bold;
+    transition: all 0.3s ease;
   }
   
-  .projects {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+  button:hover {
+    background-color: #0052a5;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
   }
   
+  /* Project Cards */
   .project-item {
-    width: 30%;
-    margin: 10px 0;
     background: white;
-    padding: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .project-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.2);
   }
   
   .project-item img {
     max-width: 100%;
     height: auto;
+    border-radius: 10px;
+    margin-bottom: 15px;
+  }
+  
+  /* Testimonials */
+  .testimonial {
+    background-color: #007bff;
+    color: white;
+    padding: 20px;
+    width: 30%;
+    margin: 10px;
+    border-radius: 15px;
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .testimonial p {
+    font-style: italic;
+    margin-bottom: 10px;
+  }
+  
+  .testimonial:hover {
+    background-color: #0052a5;
   }
   
   /* Dark Mode */
@@ -91,57 +170,49 @@ body {
     background-color: #333;
   }
   
+  body.dark-mode nav ul li a {
+    background-color: #555;
+  }
+  
   body.dark-mode .project-item {
     background-color: #333;
     color: #e0e0e0;
   }
   
-  body.dark-mode nav ul li a {
-    background-color: #555;
+  /* Animation: Fade-in Effect */
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   
-  /* Contact Form */
-  form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  .animated-element {
+    opacity: 0;
   }
   
-  input, textarea {
-    width: 80%;
-    margin: 10px 0;
-    padding: 10px;
+  .in-view {
+    animation: fadeIn 0.8s ease-in forwards;
   }
   
-  button {
-    background: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-  }
+  /* Responsive */
+  @media screen and (max-width: 768px) {
+    nav ul {
+      flex-direction: column;
+    }
   
-  .testimonials {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-  }
+    .project-item,
+    .testimonial {
+      width: 90%;
+    }
   
-  .testimonial {
-    background: #007bff;
-    color: white;
-    padding: 20px;
-    width: 30%;
-    border-radius: 10px;
-  }
-  
-  /* Accordion (Resume Section) */
-  .resume-section .toggle-btn {
-    cursor: pointer;
-    font-size: 1.5rem;
-  }
-  
-  .resume-details {
-    display: none;
+    .projects,
+    .testimonials {
+      flex-direction: column;
+    }
   }
   
